@@ -72,7 +72,7 @@ describe("Voting", () => {
                 .addVoter(owner.address)
             )
             .to.be.revertedWith(
-                "Ownable: caller is not the "
+                "Ownable: caller is not the owner"
             )
         })
         
