@@ -1,0 +1,27 @@
+name: Build Project 2
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 4.\ Truffle\ \&\ CI-CD/Tests/Projet/hardhat/**
+
+defaults:
+  run:
+    working-directory: 4.\ Truffle\ \&\ CI-CD/Tests/Projet/hardhat/
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Install project dependencies
+        run: yarn install --frozen-lockfile
+      - name: Compile contracts
+        run: yarn hardhat compile
+      - name: Test contracts
+        run: yarn hardhat test
