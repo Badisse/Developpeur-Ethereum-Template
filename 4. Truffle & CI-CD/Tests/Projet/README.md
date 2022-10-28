@@ -11,7 +11,7 @@
 
 ## General Information
 - No dependencies required except [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/compose-file/)
-- Build an app from scratch with [Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started)
+
 
 
 ## Technologies Used
