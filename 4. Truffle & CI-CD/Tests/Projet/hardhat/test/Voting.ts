@@ -1,5 +1,6 @@
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { expect } from "chai";
+import { BigNumber } from "ethers";
 import { ethers } from "hardhat";
 import { Voting__factory, Voting } from "../typechain-types";
 
@@ -45,14 +46,14 @@ describe("Voting", () => {
         it("Should be in RegisteringVoters workflow status", async () => {
             const workflowStatus = await voting.workflowStatus();
             expect(workflowStatus)
-            .to.equal(
+            .to.eql(
                 WorkflowStatus.RegisteringVoters
             );
         });
 
         it("Should have winning proposal ID set to 0", async () => {
             const winningProposalID = await voting.winningProposalID();
-            expect(winningProposalID).to.equal(0);
+            expect(winningProposalID).to.eql(BigNumber.from(0));
         });
     });
 
@@ -76,10 +77,22 @@ describe("Voting", () => {
             )
         })
         
-        it("Should get voter added", async () => {
+        it("Should get voter added registered", async () => {
             await voting.addVoter(owner.address);
             const voter = await voting.getVoter(owner.address);
             expect(voter.isRegistered).to.be.true;
+        })
+
+        it("Should get voter added with votedProposalId init with 0", async () => {
+            await voting.addVoter(owner.address);
+            const voter = await voting.getVoter(owner.address);
+            expect(voter.votedProposalId).to.eql(BigNumber.from(0));
+        })
+
+        it("Should get a voter non registered", async () => {
+            await voting.addVoter(owner.address);
+            const voter = await voting.getVoter(voter1.address);
+            expect(voter.isRegistered).to.be.false;
         })
 
         it("Should revert getVoter because non voter", async () => {
@@ -100,7 +113,7 @@ describe("Voting", () => {
                 WorkflowStatus.ProposalsRegistrationStarted
             );
             const workflowStatus = await voting.workflowStatus();
-            expect(workflowStatus).to.equal(
+            expect(workflowStatus).to.eql(
                 WorkflowStatus.ProposalsRegistrationStarted
             );
         })
@@ -129,14 +142,14 @@ describe("Voting", () => {
             await voting.addVoter(owner.address);
             await voting.startProposalsRegistering();
             const proposal = await voting.getOneProposal(0);
-            expect(proposal.description).to.equal(proposals[0]);
+            expect(proposal.description).to.eql(proposals[0]);
         })
 
         it("Should add a proposal",async () => {
             await voting.addVoter(owner.address);
             await voting.startProposalsRegistering();
             const tx = await voting.addProposal(proposals[1]);
-            expect(tx).to.emit(voting, "ProposalRegistered").withArgs(0);
+            expect(tx).to.emit(voting, "ProposalRegistered").withArgs(BigNumber.from(0));
         })
 
         it("Should revert addProposal because non voter", async () => {
@@ -174,7 +187,7 @@ describe("Voting", () => {
             await voting.startProposalsRegistering();
             await voting.addProposal(proposals[1]);
             const proposal = await voting.getOneProposal(1);
-            expect(proposal.description).to.equal(proposals[1]);
+            expect(proposal.description).to.eql(proposals[1]);
         })
 
         it("Should revert getOneProposal because non voter", async () => {
@@ -194,7 +207,7 @@ describe("Voting", () => {
                 WorkflowStatus.ProposalsRegistrationEnded
             );
             const workflowStatus = await voting.workflowStatus();
-            expect(workflowStatus).to.equal(
+            expect(workflowStatus).to.eql(
                 WorkflowStatus.ProposalsRegistrationEnded
             );
         })
@@ -231,7 +244,7 @@ describe("Voting", () => {
                 WorkflowStatus.VotingSessionStarted
             );
             const workflowStatus = await voting.workflowStatus();
-            expect(workflowStatus).to.equal(
+            expect(workflowStatus).to.eql(
                 WorkflowStatus.VotingSessionStarted
             );
         })
@@ -292,7 +305,7 @@ describe("Voting", () => {
             );
         })
 
-        it("Should revert setVote because proposal not found", async () => {
+        it("Should revert setVote because proposal don't exist", async () => {
             await voting.addVoter(owner.address);
             await voting.startProposalsRegistering();
             await voting.addProposal(proposals[1]);
@@ -341,7 +354,7 @@ describe("Voting", () => {
             await voting.startVotingSession();
             await voting.setVote(1);
             const voter = await voting.getVoter(owner.address);
-            expect(voter.votedProposalId).is.equal(1);
+            expect(voter.votedProposalId).to.eql(BigNumber.from(1));
         })
 
         it("Shoul end voting session", async () => {
@@ -354,7 +367,7 @@ describe("Voting", () => {
                 WorkflowStatus.VotingSessionEnded
             );
             const workflowStatus = await voting.workflowStatus();
-            expect(workflowStatus).to.equal(
+            expect(workflowStatus).to.eql(
                 WorkflowStatus.VotingSessionEnded
             );
         })
@@ -394,11 +407,11 @@ describe("Voting", () => {
             await voting.connect(voter2).setVote(2);
             await voting.connect(voter3).setVote(1);
             const proposal1 = await voting.getOneProposal(1);
-            expect(proposal1.voteCount).to.equal(3);
+            expect(proposal1.voteCount).to.eql(BigNumber.from(3));
             const proposal2 = await voting.getOneProposal(2);
-            expect(proposal2.voteCount).to.equal(1);
+            expect(proposal2.voteCount).to.eql(BigNumber.from(1));
             const proposal3 = await voting.getOneProposal(3);
-            expect(proposal3.voteCount).to.equal(0);
+            expect(proposal3.voteCount).to.eql(BigNumber.from(0));
         })
         
     })
@@ -415,7 +428,7 @@ describe("Voting", () => {
                 WorkflowStatus.VotesTallied
             );
             const workflowStatus = await voting.workflowStatus();
-            expect(workflowStatus).to.equal(
+            expect(workflowStatus).to.eql(
                 WorkflowStatus.VotesTallied
             );
         })
@@ -439,22 +452,6 @@ describe("Voting", () => {
             );
         })
 
-        it("Should tally votes", async () => {
-            await voting.startProposalsRegistering();
-            await voting.endProposalsRegistering();
-            await voting.startVotingSession();
-            await voting.endVotingSession();
-            const tx = await voting.tallyVotes();
-            expect(tx).to.emit(voting, "WorkflowStatusChange").withArgs(
-                WorkflowStatus.VotingSessionEnded,
-                WorkflowStatus.VotesTallied
-            );
-            const workflowStatus = await voting.workflowStatus();
-            expect(workflowStatus).to.equal(
-                WorkflowStatus.VotesTallied
-            );
-        })
-
         it("Should get proposal 1 winning", async () => {
             await voting.addVoter(owner.address);
             await voting.addVoter(voter1.address);
@@ -473,7 +470,7 @@ describe("Voting", () => {
             await voting.endVotingSession();
             await voting.tallyVotes();
             const winningProposalID = await voting.winningProposalID();
-            expect(winningProposalID).to.equal(1);
+            expect(winningProposalID).to.eql(BigNumber.from(1));
         })
         
     })
