@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  hardhat-typescript:
+    build: ./
+    volumes:
+      - ./hardhat:/usr/src/app
+    environment:
+      - COINMARKETCAP_API_KEY=${COINMARKETCAP_API_KEY}
