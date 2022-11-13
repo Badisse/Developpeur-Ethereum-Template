@@ -4,4 +4,4 @@ RUN apt update && apt install git -y
 
 WORKDIR /usr/src/app
 
-CMD ["sleep", "infinity"]
+CMD ["yarn", "hardhat-node"]
