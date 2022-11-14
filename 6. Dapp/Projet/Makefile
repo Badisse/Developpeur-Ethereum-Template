@@ -2,6 +2,7 @@ DC = docker compose
 DCE = $(DC) exec
 IMAGE = hardhat-typescript
 PACKAGE = --help
+SCRIPT = scripts/deploy.ts
 
 # Get help
 help:
