@@ -104,7 +104,7 @@ contract Voting is Ownable {
     /// @notice Must be called by a voter
     /// @dev Emit a Voted event
     /// @param _id the id of the proposal
-    function setVote( uint _id) external onlyVoters {
+    function setVote(uint _id) external onlyVoters {
         require(workflowStatus == WorkflowStatus.VotingSessionStarted, 'Voting session havent started yet');
         require(voters[msg.sender].hasVoted != true, 'You have already voted');
         require(_id < proposalsArray.length, 'Proposal not found'); // pas obligé, et pas besoin du >0 car uint
@@ -113,7 +113,7 @@ contract Voting is Ownable {
         voters[msg.sender].hasVoted = true;
         proposalsArray[_id].voteCount++;
 
-        if(proposalsArray[_id] > proposalsArray[winningProposalID]) {
+        if(proposalsArray[_id].voteCount > proposalsArray[winningProposalID].voteCount) {
           winningProposalID = _id;
         }
 
