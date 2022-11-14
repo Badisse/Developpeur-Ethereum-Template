@@ -417,40 +417,6 @@ describe("Voting", () => {
     })
 
     describe("Vote tallied", () => {
-        it("Should tally votes",async () => {
-            await voting.startProposalsRegistering();
-            await voting.endProposalsRegistering();
-            await voting.startVotingSession();
-            await voting.endVotingSession();
-            const tx = await voting.tallyVotes();
-            expect(tx).to.emit(voting, "WorkflowStatusChange").withArgs(
-                WorkflowStatus.VotingSessionEnded,
-                WorkflowStatus.VotesTallied
-            );
-            const workflowStatus = await voting.workflowStatus();
-            expect(workflowStatus).to.eql(
-                WorkflowStatus.VotesTallied
-            );
-        })
-
-        it("Should revert tallyVotes because not owner", async () => {
-            await expect(
-                voting.connect(notOwner)
-                    .tallyVotes()
-            )
-            .to.be.revertedWith(
-                "Ownable: caller is not the owner"
-            )
-        })
-
-        it("Should revert tallyVotes because non in good workflow status", async () => {
-            await expect(
-                voting.tallyVotes()
-            )
-            .to.be.revertedWith(
-                "Current status is not voting session ended"
-            );
-        })
 
         it("Should get proposal 1 winning", async () => {
             await voting.addVoter(owner.address);
@@ -468,7 +434,6 @@ describe("Voting", () => {
             await voting.connect(voter2).setVote(2);
             await voting.connect(voter3).setVote(1);
             await voting.endVotingSession();
-            await voting.tallyVotes();
             const winningProposalID = await voting.winningProposalID();
             expect(winningProposalID).to.eql(BigNumber.from(1));
         })
