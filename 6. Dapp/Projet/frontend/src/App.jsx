@@ -33,7 +33,11 @@ function App() {
             <div>
               <h2>Admin</h2>
               <CreateVotingSession setContractAddress={setContractAddress} setAdmin={setAdmin} />
-              <ManageVotingSession setContractAddress={setContractAddress} setAdmin={setAdmin} />
+              <ManageVotingSession
+                currentAccount={currentAccount}
+                setContractAddress={setContractAddress}
+                setAdmin={setAdmin}
+              />
               <h2>Voter</h2>
               <AccessVotingSession setContractAddress={setContractAddress} setVoter={setVoter} />
             </div>
