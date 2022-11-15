@@ -9,8 +9,7 @@ function ManageVotingSession({ currentAccount, setContractAddress, setAdmin }) {
 
   const checkOwnerchip = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(address, voting.abi, signer);
+    const contract = new ethers.Contract(address, voting.abi, provider);
     const owner = await contract.owner();
     return currentAccount === owner;
   };

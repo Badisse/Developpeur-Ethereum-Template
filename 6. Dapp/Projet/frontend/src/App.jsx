@@ -39,7 +39,11 @@ function App() {
                 setAdmin={setAdmin}
               />
               <h2>Voter</h2>
-              <AccessVotingSession setContractAddress={setContractAddress} setVoter={setVoter} />
+              <AccessVotingSession
+                currentAccount={currentAccount}
+                setContractAddress={setContractAddress}
+                setVoter={setVoter}
+              />
             </div>
           )
           : undefined
