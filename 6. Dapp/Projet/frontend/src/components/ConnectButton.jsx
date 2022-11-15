@@ -1,38 +1,50 @@
-import React, { useContext } from 'react';
-import { Button } from '@chakra-ui/react';
+import React from 'react';
 import { ethers } from 'ethers';
-import EthContext from '../contexts/EthContext';
+import { Button } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 
-export default function ConnectButton() {
-  const ethContext = useContext(EthContext);
-
-  const handleConnect = () => {
+function ConnectButton({
+  currentAccount,
+  setCurrentAccount,
+  setAdmin,
+  setVoter,
+}) {
+  const handleConnect = async () => {
     console.log('Connect');
     if (!window.ethereum) {
       console.log('Install MetaMask');
       return;
     }
-
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-
     provider.send('eth_requestAccounts', [])
       .then((accounts) => {
-        if (accounts.length > 0) ethContext.setCurrentAccount(accounts[0]);
+        if (accounts.length > 0) setCurrentAccount(accounts[0]);
       })
       .catch((e) => console.log(e));
   };
 
   const handleDisconnect = () => {
     console.log('Disconnect');
-    ethContext.setCurrentAccount(undefined);
+    setCurrentAccount(undefined);
+    setAdmin(false);
+    setVoter(false);
   };
 
   return (
     <Button
       colorScheme="blue"
-      onClick={ethContext.currentAccount ? handleDisconnect : handleConnect}
+      onClick={currentAccount ? handleDisconnect : handleConnect}
     >
-      {ethContext.currentAccount || 'Connect Wallet'}
+      {currentAccount || 'Connect Wallet'}
     </Button>
   );
 }
+
+ConnectButton.propTypes = {
+  currentAccount: PropTypes.string.isRequired,
+  setCurrentAccount: PropTypes.func.isRequired,
+  setAdmin: PropTypes.func.isRequired,
+  setVoter: PropTypes.func.isRequired,
+};
+
+export default ConnectButton;
