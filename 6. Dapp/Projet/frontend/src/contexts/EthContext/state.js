@@ -7,7 +7,11 @@ const initialState = {
   provider: null,
   accounts: null,
   networkID: null,
+  contractAddress: null,
   contract: null,
+  isAdmin: false,
+  isVoter: false,
+  workflowStatus: null,
 };
 
 const reducer = (state, action) => {
