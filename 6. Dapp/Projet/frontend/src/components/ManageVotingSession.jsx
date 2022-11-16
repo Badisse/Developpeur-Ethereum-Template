@@ -11,7 +11,9 @@ function ManageVotingSession({ currentAccount, setContractAddress, setAdmin }) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const contract = new ethers.Contract(address, voting.abi, provider);
     const owner = await contract.owner();
-    return currentAccount === owner;
+    console.log(`owner: ${owner}`);
+    console.log(`currentAccount: ${currentAccount}`);
+    return currentAccount.toLowerCase() === owner.toLowerCase();
   };
 
   const handleClick = async () => {
