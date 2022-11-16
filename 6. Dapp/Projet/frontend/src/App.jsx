@@ -6,6 +6,10 @@ import AddVoter from './components/AddVoter';
 import NextWorkflowStatus from './components/NextWorkflowStatus';
 import ManageVotingSession from './components/ManageVotingSession';
 import AccessVotingSession from './components/AccessVotingSession';
+import AddProposal from './components/AddProposal';
+import GetProposal from './components/GetProposal';
+import GetVoter from './components/GetVoter';
+import SetVote from './components/SetVote';
 
 function App() {
   const [admin, setAdmin] = useState(false);
@@ -66,6 +70,35 @@ function App() {
             <AddVoter
               contractAddress={contractAddress}
               setVoters={setVoters}
+            />
+          )
+          : undefined
+      }
+      {
+        voter
+          ? (
+            <>
+              <GetProposal contractAddress={contractAddress} />
+              <GetVoter contractAddress={contractAddress} />
+            </>
+          )
+          : undefined
+      }
+      {
+        voter && (workflowStatus === 1)
+          ? (
+            <AddProposal
+              contractAddress={contractAddress}
+            />
+          )
+          : undefined
+      }
+      {
+        voter && (workflowStatus === 3)
+          ? (
+            <SetVote
+              currentAccount={currentAccount}
+              contractAddress={contractAddress}
             />
           )
           : undefined
