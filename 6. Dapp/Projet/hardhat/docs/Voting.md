@@ -16,9 +16,9 @@ This contract allow you to create a voting system
 function addProposal(string _desc) external nonpayable
 ```
 
-Add a proposalMust be called by a registered voters
+Add a proposal
 
-*Emit a ProposalRegistered event*
+*Must be called by a registered voters. Emit a ProposalRegistered event*
 
 #### Parameters
 
@@ -32,9 +32,9 @@ Add a proposalMust be called by a registered voters
 function addVoter(address _addr) external nonpayable
 ```
 
-Add a voterMust be called by the owner of the contract
+Add a voter
 
-*Emit a VoterRegistered event*
+*Must be called by the owner of the contract. Emit a VoterRegistered event*
 
 #### Parameters
 
@@ -48,9 +48,9 @@ Add a voterMust be called by the owner of the contract
 function endProposalsRegistering() external nonpayable
 ```
 
-End proposal registering sessionMust be called the owner of the contract
+End proposal registering session
 
-*Emit a WorkflowStatusChange event*
+*Must be called the owner of the contract. Emit a WorkflowStatusChange event*
 
 
 ### endVotingSession
@@ -59,9 +59,9 @@ End proposal registering sessionMust be called the owner of the contract
 function endVotingSession() external nonpayable
 ```
 
-End a voting sessionMust be called the owner of the contract
+End a voting session
 
-*Emit a WorkflowStatusChange event*
+*Must be called the owner of the contract. Emit a WorkflowStatusChange event*
 
 
 ### getOneProposal
@@ -70,9 +70,9 @@ End a voting sessionMust be called the owner of the contract
 function getOneProposal(uint256 _id) external view returns (struct Voting.Proposal)
 ```
 
-Get a ProposalMust be called by a registered voter
+Get a Proposal
 
-
+*Must be called by a registered voter*
 
 #### Parameters
 
@@ -92,9 +92,9 @@ Get a ProposalMust be called by a registered voter
 function getVoter(address _addr) external view returns (struct Voting.Voter)
 ```
 
-Return a voterMust be called by a registered voter
+Return a voter
 
-
+*Must be called by a registered voter*
 
 #### Parameters
 
@@ -142,9 +142,9 @@ function renounceOwnership() external nonpayable
 function setVote(uint256 _id) external nonpayable
 ```
 
-Vote for a proposalMust be called by a voter
+Vote for a proposal
 
-*Emit a Voted event*
+*Must be called by a voter. Emit a Voted event*
 
 #### Parameters
 
@@ -158,9 +158,9 @@ Vote for a proposalMust be called by a voter
 function startProposalsRegistering() external nonpayable
 ```
 
-Start proposal registering sessionMust be called the owner of the contract
+Start proposal registering session
 
-*Emit a WorkflowStatusChange event*
+*Must be called the owner of the contract. Emit a WorkflowStatusChange event*
 
 
 ### startVotingSession
@@ -169,9 +169,9 @@ Start proposal registering sessionMust be called the owner of the contract
 function startVotingSession() external nonpayable
 ```
 
-Start a voting sessionMust be called the owner of the contract
+Start a voting session
 
-*Emit a WorkflowStatusChange event*
+*Must be called the owner of the contract. Emit a WorkflowStatusChange event*
 
 
 ### transferOwnership
