@@ -8,37 +8,27 @@ import { ethers } from 'ethers';
 import PropTypes from 'prop-types';
 import EthContext from './EthContext';
 import { reducer, actions, initialState } from './state';
-import voting from '../../contracts/Voting.json';
+import artifact from '../../contracts/Voting.json';
 
 function EthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const init = useCallback(async (artifact) => {
-    if (artifact) {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const accounts = await provider.listAccounts();
-      const networkID = await provider.getNetwork();
-      dispatch({
-        type: actions.init,
-        data: {
-          artifact, provider, accounts, networkID,
-        },
-      });
-    }
+  const init = useCallback(async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    let account;
+    provider.send('eth_requestAccounts', [])
+      .then((accnt) => {
+        if (accnt.length > 0) [account] = accnt;
+      })
+      .catch((e) => console.log(e));
+    const networkID = await provider.getNetwork();
+    dispatch({
+      type: actions.init,
+      data: {
+        artifact, provider, account, networkID,
+      },
+    });
   }, []);
-
-  useEffect(() => {
-    const tryInit = async () => {
-      try {
-        const artifact = voting;
-        init(artifact);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    tryInit();
-  }, [init]);
 
   useEffect(() => {
     const events = ['chainChanged', 'accountsChanged'];
@@ -55,7 +45,7 @@ function EthProvider({ children }) {
   return (
     <EthContext.Provider value={
       useMemo(() => ({
-        state, dispatch,
+        state, dispatch, init,
       }), [state, dispatch])
     }
     >

@@ -1,11 +1,12 @@
 const actions = {
   init: 'INIT',
+  reset: 'RESET',
 };
 
 const initialState = {
   artifact: null,
   provider: null,
-  accounts: null,
+  account: null,
   networkID: null,
   contractAddress: null,
   contract: null,
@@ -19,6 +20,8 @@ const reducer = (state, action) => {
   switch (type) {
     case actions.init:
       return { ...state, ...data };
+    case actions.reset:
+      return { initialState };
     default:
       throw new Error('Undefined reducer action type');
   }
