@@ -9,7 +9,9 @@ function AccessVotingSession({ currentAccount, setContractAddress, setVoter }) {
 
   const checkVoter = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const contract = new ethers.Contract(address, voting.abi, provider);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(address, voting.abi, signer);
+    console.log(currentAccount);
     const voter = await contract.getVoter(currentAccount);
     console.log(voter);
     return voter?.isRegistered;
