@@ -1,4 +1,5 @@
 import { HardhatUserConfig } from "hardhat/config";
+import '@primitivefi/hardhat-dodoc';
 import "@nomicfoundation/hardhat-toolbox";
 import 'solidity-coverage';
 import "hardhat-gas-reporter";
