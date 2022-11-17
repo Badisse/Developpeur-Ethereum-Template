@@ -1,54 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
+import RoleButton from './RoleButton';
+import ROLES from '../../constants/roles';
 
 function ChooseRole() {
-  const [adminIsToggle, toggleAdmin] = useState(true);
-  const [voterIsToggle, toggleVoter] = useState(false);
-
   return (
-    <div className="flex w-2/3 justify-around bg-red-600">
-      <div>
-        <div className="flex justify-between items-center w-60 bg-green-500">
-          <div>Administrator</div>
-          <button
-            type="button"
-            className="border p-2"
-            onClick={() => {
-              toggleAdmin(!adminIsToggle);
-              toggleVoter(!voterIsToggle);
-            }}
-          >
-            +
-          </button>
+    <div className="flex flex-col items-center justify-around w-2/3 h-1/4">
+      <div>Please choose a role</div>
+      <div className="flex justify-around items-center w-2/3">
+        <div>
+          <RoleButton userRole={ROLES.admin} />
         </div>
-        {
-          adminIsToggle && (
-            <>
-              <div>Create Voting Session</div>
-              <div>Manage Voting Session</div>
-            </>
-          )
-        }
 
-      </div>
-      <div>
-        <div className="flex justify-between items-center w-60 bg-green-500">
-          <div>Voter</div>
-          <button
-            type="button"
-            className="border p-2"
-            onClick={() => {
-              toggleAdmin(!adminIsToggle);
-              toggleVoter(!voterIsToggle);
-            }}
-          >
-            +
-          </button>
+        <div>
+          <RoleButton userRole={ROLES.voter} />
         </div>
-        {
-          voterIsToggle && (
-            <div>Access Voting Session</div>
-          )
-        }
       </div>
     </div>
   );

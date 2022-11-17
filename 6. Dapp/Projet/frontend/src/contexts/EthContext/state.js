@@ -1,6 +1,6 @@
 const actions = {
   init: 'INIT',
-  reset: 'RESET',
+  updateRole: 'UPDATE_ROLE',
 };
 
 const initialState = {
@@ -10,8 +10,7 @@ const initialState = {
   networkID: null,
   contractAddress: null,
   contract: null,
-  isAdmin: false,
-  isVoter: false,
+  userRole: null,
   workflowStatus: null,
 };
 
@@ -20,8 +19,8 @@ const reducer = (state, action) => {
   switch (type) {
     case actions.init:
       return { ...state, ...data };
-    case actions.reset:
-      return { initialState };
+    case actions.updateRole:
+      return { ...state, ...data };
     default:
       throw new Error('Undefined reducer action type');
   }

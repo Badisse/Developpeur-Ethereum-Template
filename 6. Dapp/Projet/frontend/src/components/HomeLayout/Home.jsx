@@ -3,12 +3,14 @@ import useEth from '../../contexts/EthContext/useEth';
 import ChooseRole from './ChooseRole';
 
 function Home() {
-  const { init, state: { account } } = useEth();
+  const { init, state: { account, userRole } } = useEth();
 
   const handleConnect = () => {
     console.log('connect');
     init();
   };
+
+  if (userRole) return undefined;
 
   return (
     <>
