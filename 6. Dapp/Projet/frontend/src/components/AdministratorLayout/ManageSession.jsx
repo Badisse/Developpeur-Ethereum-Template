@@ -4,33 +4,38 @@ import WORKFLOW_STATUS, { WORKFLOW_STATUS_STRING } from '../../constants/workflo
 import { actions } from '../../contexts/EthContext/state';
 
 function ManageSession() {
-  const { state: { workflowStatus, contract }, dispatch } = useEth();
+  const { state: { workflowStatus, contract, provider }, dispatch } = useEth();
 
   const updateWorkflowStatus = async () => {
     dispatch({
       type: actions.loading,
     });
+    let transaction;
     switch (workflowStatus) {
       case WORKFLOW_STATUS.registeringVoters:
-        await contract.startProposalsRegistering();
+        transaction = await contract.startProposalsRegistering();
         break;
       case WORKFLOW_STATUS.proposalsRegistrationStarted:
-        await contract.endProposalsRegistering();
+        transaction = await contract.endProposalsRegistering();
         break;
       case WORKFLOW_STATUS.proposalsRegistrationEnded:
-        await contract.startVotingSession();
+        transaction = await contract.startVotingSession();
         break;
       case WORKFLOW_STATUS.votingSessionStarted:
-        await contract.endVotingSession();
+        transaction = await contract.endVotingSession();
         break;
       default:
         break;
     }
+    console.log(transaction);
     try {
-      const newWorkflowStatus = await contract.workflowStatus();
-      dispatch({
-        type: actions.updateWorkflowStatus,
-        newWorkflowStatus,
+      provider.waitForTransaction(transaction.hash).then(async () => {
+        const newWorkflowStatus = await contract.workflowStatus();
+        console.log(newWorkflowStatus);
+        dispatch({
+          type: actions.updateWorkflowStatus,
+          workflowStatus: newWorkflowStatus,
+        });
       });
     } catch (err) {
       console.log(err);
