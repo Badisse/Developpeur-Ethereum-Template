@@ -4,9 +4,9 @@ import useEth from '../../contexts/EthContext/useEth';
 import ManageSession from './ManageSession';
 
 function Admin() {
-  const { state: { contract, owner, workflowStatus } } = useEth();
+  const { state: { contract, isOwner, workflowStatus } } = useEth();
   return (
-    !owner
+    !isOwner
       ? (
         <InitAdmin>
           {

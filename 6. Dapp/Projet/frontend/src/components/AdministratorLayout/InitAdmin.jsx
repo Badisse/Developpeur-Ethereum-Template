@@ -11,13 +11,14 @@ function InitAdmin({ children }) {
   const deployContract = async () => {
     const factory = new ethers.ContractFactory(artifact.abi, artifact.bytecode, signer);
     const contract = await factory.deploy();
+    const isOwner = true;
     dispatch({
       type: actions.loading,
     });
     const workflowStatus = await contract.workflowStatus();
     dispatch({
       type: actions.setContract,
-      data: { contract, workflowStatus },
+      data: { contract, workflowStatus, isOwner },
     });
   };
 
