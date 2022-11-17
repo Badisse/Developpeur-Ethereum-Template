@@ -106,9 +106,18 @@ function VoterDashboard() {
         />
         <button type="button" onClick={getVoter}>Get</button>
         <div>
-          <div>{voter?.isRegistered ? 'registered' : 'not registered'}</div>
-          <div>{voter?.hasvoted ? 'has voted' : 'not voted yet'}</div>
-          <div>{voter?.votedProposalId.toNumber()}</div>
+          {
+            voter
+              ? (
+                <>
+                  <div>{voter.isRegistered ? 'registered' : 'not registered'}</div>
+                  <div>{voter.hasvoted ? 'has voted' : 'not voted yet'}</div>
+                  <div>{voter.votedProposalId.toNumber()}</div>
+                </>
+              )
+              : undefined
+          }
+
         </div>
       </div>
       <div>
@@ -125,10 +134,16 @@ function VoterDashboard() {
                 onChange={(e) => setOneProposalId(e.target.value)}
               />
               <button type="button" onClick={getOneProposal}>Get</button>
-              <div>
-                <div>{proposal?.description}</div>
-                <div>{proposal?.voteCount.toNumber()}</div>
-              </div>
+              {
+                proposal
+                  ? (
+                    <>
+                      <div>{proposal.description}</div>
+                      <div>{proposal.voteCount.toNumber()}</div>
+                    </>
+                  )
+                  : undefined
+              }
             </>
           )
         }
