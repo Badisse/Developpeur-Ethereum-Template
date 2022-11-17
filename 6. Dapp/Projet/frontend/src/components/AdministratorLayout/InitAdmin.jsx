@@ -24,11 +24,12 @@ function InitAdmin() {
     }
   };
 
-  const getContract = async (contractAddress) => {
+  // TODO: Check if owner
+  const getContract = async () => {
     dispatch({
       type: actions.loading,
     });
-    const contract = new ethers.Contract(contractAddress, artifact.abi, signer);
+    const contract = new ethers.Contract(inputAddress, artifact.abi, signer);
     try {
       const workflowStatus = await contract.workflowStatus();
       dispatch({
@@ -54,7 +55,7 @@ function InitAdmin() {
           value={inputAddress}
           onChange={(e) => setInputAddress(e.target.value)}
         />
-        <button type="button" onClick={() => getContract(inputAddress)}>Manage</button>
+        <button type="button" onClick={() => getContract()}>Manage</button>
       </div>
     </div>
   );

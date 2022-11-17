@@ -28,17 +28,13 @@ function ManageSession() {
       default:
         break;
     }
-    try {
-      provider.waitForTransaction(transaction.hash).then(async () => {
-        const newWorkflowStatus = await contract.workflowStatus();
-        dispatch({
-          type: actions.updateWorkflowStatus,
-          workflowStatus: newWorkflowStatus,
-        });
+    provider.waitForTransaction(transaction.hash).then(async () => {
+      const newWorkflowStatus = await contract.workflowStatus();
+      dispatch({
+        type: actions.updateWorkflowStatus,
+        workflowStatus: newWorkflowStatus,
       });
-    } catch (err) {
-      console.log(err);
-    }
+    });
   };
 
   return (
