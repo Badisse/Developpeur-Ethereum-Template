@@ -44,6 +44,7 @@ function InitAdmin() {
         <div>Manage a voting session</div>
         <input
           type="text"
+          className="text-gray-800"
           placeholder="Contract Address"
           value={inputAddress}
           onChange={(e) => setInputAddress(e.target.value)}

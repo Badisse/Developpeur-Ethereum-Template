@@ -84,6 +84,7 @@ function ManageSession() {
             </div>
             <input
               type="text"
+              className="text-gray-800"
               onChange={
                 (e) => setVoterAddress(e.target.value)
               }
