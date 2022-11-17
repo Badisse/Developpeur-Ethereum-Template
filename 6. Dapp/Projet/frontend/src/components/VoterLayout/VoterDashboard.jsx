@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { ethers } from 'ethers';
 import useEth from '../../contexts/EthContext/useEth';
 import { actions } from '../../contexts/EthContext/state';
 import WORKFLOW_STATUS, { WORKFLOW_STATUS_STRING } from '../../constants/workflowStatus';
