@@ -4,9 +4,21 @@ import useEth from '../../contexts/EthContext/useEth';
 import VoterDashboard from './VoterDashboard';
 
 function Voter() {
-  const { state: { contract } } = useEth();
+  const { state: { contract, workflowStatus, voter } } = useEth();
+  console.log(contract && !workflowStatus);
   return (
-    !contract ? <InitVoter /> : <VoterDashboard />
+    !voter
+      ? (
+        <InitVoter>
+          {
+            contract && !!workflowStatus && (<div>Please enter a valid contract address</div>)
+          }
+          {
+            (typeof workflowStatus === 'number') && (<div>You are not registered</div>)
+          }
+        </InitVoter>
+      )
+      : <VoterDashboard />
   );
 }
 

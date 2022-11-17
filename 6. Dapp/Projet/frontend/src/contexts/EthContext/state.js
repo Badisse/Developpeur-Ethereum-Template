@@ -17,6 +17,7 @@ const initialState = {
   userRole: null,
   workflowStatus: null,
   loading: false,
+  voter: false,
 };
 
 const reducer = (state, action) => {
@@ -32,8 +33,7 @@ const reducer = (state, action) => {
     case actions.setContract:
       return {
         ...state,
-        contract: action.data.contract,
-        workflowStatus: action.data.workflowStatus,
+        ...action.data,
         loading: false,
       };
     case actions.updateWorkflowStatus:

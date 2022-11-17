@@ -1,27 +1,36 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
+import PropTypes from 'prop-types';
 import useEth from '../../contexts/EthContext/useEth';
 import { actions } from '../../contexts/EthContext/state';
 
-function InitVoter() {
-  const { state: { signer, artifact }, dispatch } = useEth();
+function InitVoter({ children }) {
+  const { state: { signer, artifact, account }, dispatch } = useEth();
   const [inputAddress, setInputAddress] = useState('');
 
-  // TODO: check if voter
   const getContract = async (contractAddress) => {
     dispatch({
       type: actions.loading,
     });
     const contract = new ethers.Contract(contractAddress, artifact.abi, signer);
+    let workflowStatus = null;
+    let voter = null;
     try {
-      const workflowStatus = await contract.workflowStatus();
-      dispatch({
-        type: actions.setContract,
-        data: { contract, workflowStatus },
-      });
+      workflowStatus = await contract.workflowStatus();
     } catch (err) {
-      console.log('not a contract address');
+      console.log(err);
     }
+    if (workflowStatus) {
+      try {
+        voter = await contract.getVoter(account);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    dispatch({
+      type: actions.setContract,
+      data: { contract, workflowStatus, voter },
+    });
   };
 
   return (
@@ -35,8 +44,13 @@ function InitVoter() {
         onChange={(e) => setInputAddress(e.target.value)}
       />
       <button type="button" onClick={() => getContract(inputAddress)}>Access</button>
+      {children}
     </div>
   );
 }
+
+InitVoter.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default InitVoter;
