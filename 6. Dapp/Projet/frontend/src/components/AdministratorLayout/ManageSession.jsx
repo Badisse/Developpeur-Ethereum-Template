@@ -8,9 +8,6 @@ function ManageSession() {
   const [voterAddress, setVoterAddress] = useState();
 
   const updateWorkflowStatus = async () => {
-    dispatch({
-      type: actions.loading,
-    });
     let transaction;
     switch (workflowStatus) {
       case WORKFLOW_STATUS.registeringVoters:
@@ -28,34 +25,57 @@ function ManageSession() {
       default:
         break;
     }
-    provider.waitForTransaction(transaction.hash).then(async () => {
-      const newWorkflowStatus = await contract.workflowStatus();
-      dispatch({
-        type: actions.updateWorkflowStatus,
-        workflowStatus: newWorkflowStatus,
-      });
+    dispatch({
+      type: actions.loading,
     });
+    if (transaction) {
+      provider.waitForTransaction(transaction.hash).then(async () => {
+        const newWorkflowStatus = await contract.workflowStatus();
+        dispatch({
+          type: actions.updateWorkflowStatus,
+          workflowStatus: newWorkflowStatus,
+        });
+      });
+    }
+  };
+
+  const addVoter = async () => {
+    const transaction = await contract.addVoter(voterAddress);
+    dispatch({
+      type: actions.loading,
+    });
+    if (transaction) {
+      provider.waitForTransaction(transaction.hash).then(async () => {
+        dispatch({
+          type: actions.finished,
+        });
+      });
+    }
   };
 
   return (
     <div className="h-screen">
-      {workflowStatus !== WORKFLOW_STATUS.votingSessionEnded
-        && (
-          <div>
-            <div>
-              Current Workflow Status:
-              {WORKFLOW_STATUS_STRING[workflowStatus]}
-            </div>
-            <div>Update Workflow Status</div>
-            <button
-              type="button"
-              className="border"
-              onClick={updateWorkflowStatus}
-            >
-              Update
-            </button>
-          </div>
-        )}
+      <div>
+        <div>
+          Current Workflow Status:
+          {WORKFLOW_STATUS_STRING[workflowStatus]}
+        </div>
+        {
+          workflowStatus !== WORKFLOW_STATUS.votingSessionEnded
+          && (
+            <>
+              <div>Update Workflow Status</div>
+              <button
+                type="button"
+                className="border"
+                onClick={updateWorkflowStatus}
+              >
+                Update
+              </button>
+            </>
+          )
+        }
+      </div>
       {workflowStatus === WORKFLOW_STATUS.registeringVoters
         && (
           <div>
@@ -72,6 +92,7 @@ function ManageSession() {
             <button
               type="button"
               className="border"
+              onClick={addVoter}
             >
               Add
             </button>

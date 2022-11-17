@@ -8,27 +8,20 @@ function InitAdmin() {
   const [inputAddress, setInputAddress] = useState('');
 
   const deployContract = async () => {
+    const factory = new ethers.ContractFactory(artifact.abi, artifact.bytecode, signer);
+    const contract = await factory.deploy();
     dispatch({
       type: actions.loading,
     });
-    const factory = new ethers.ContractFactory(artifact.abi, artifact.bytecode, signer);
-    const contract = await factory.deploy();
-    try {
-      const workflowStatus = await contract.workflowStatus();
-      dispatch({
-        type: actions.setContract,
-        data: { contract, workflowStatus },
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    const workflowStatus = await contract.workflowStatus();
+    dispatch({
+      type: actions.setContract,
+      data: { contract, workflowStatus },
+    });
   };
 
   // TODO: Check if owner
   const getContract = async () => {
-    dispatch({
-      type: actions.loading,
-    });
     const contract = new ethers.Contract(inputAddress, artifact.abi, signer);
     try {
       const workflowStatus = await contract.workflowStatus();

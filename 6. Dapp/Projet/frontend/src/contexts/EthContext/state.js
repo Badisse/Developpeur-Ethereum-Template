@@ -1,5 +1,6 @@
 const actions = {
   loading: 'LOADING',
+  finished: 'FINISHED',
   init: 'INIT',
   setRole: 'UPDATE_ROLE',
   setContract: 'UPDATE_CONTRACT',
@@ -15,15 +16,17 @@ const initialState = {
   contract: null,
   userRole: null,
   workflowStatus: null,
-  loadingState: false,
+  loading: false,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case actions.loading:
-      return { ...state, loadingState: true };
+      return { ...state, loading: true };
+    case actions.finished:
+      return { ...state, loading: false };
     case actions.init:
-      return { ...initialState, ...action.data, loadingState: false };
+      return { ...initialState, ...action.data, loading: false };
     case actions.setRole:
       return { ...state, userRole: action.userRole };
     case actions.setContract:
@@ -31,13 +34,13 @@ const reducer = (state, action) => {
         ...state,
         contract: action.data.contract,
         workflowStatus: action.data.workflowStatus,
-        loadingState: false,
+        loading: false,
       };
     case actions.updateWorkflowStatus:
       return {
         ...state,
         workflowStatus: action.workflowStatus,
-        loadingState: false,
+        loading: false,
       };
     default:
       throw new Error('Undefined reducer action type');
