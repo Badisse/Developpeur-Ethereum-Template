@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
+import PropTypes from 'prop-types';
 import useEth from '../../contexts/EthContext/useEth';
 import { actions } from '../../contexts/EthContext/state';
 
-function InitAdmin() {
-  const { state: { signer, artifact }, dispatch } = useEth();
+function InitAdmin({ children }) {
+  const { state: { signer, artifact, account }, dispatch } = useEth();
   const [inputAddress, setInputAddress] = useState('');
 
   const deployContract = async () => {
@@ -20,18 +21,26 @@ function InitAdmin() {
     });
   };
 
-  // TODO: Check if owner
   const getContract = async () => {
+    dispatch({
+      type: actions.loading,
+    });
     const contract = new ethers.Contract(inputAddress, artifact.abi, signer);
+    let workflowStatus = null;
+    let isOwner = null;
     try {
-      const workflowStatus = await contract.workflowStatus();
-      dispatch({
-        type: actions.setContract,
-        data: { contract, workflowStatus },
-      });
+      workflowStatus = await contract.workflowStatus();
     } catch (err) {
-      console.log('not a contract address');
+      console.log(err);
     }
+    if (workflowStatus) {
+      const owner = await contract.owner();
+      isOwner = owner === account;
+    }
+    dispatch({
+      type: actions.setContract,
+      data: { contract, workflowStatus, isOwner },
+    });
   };
 
   return (
@@ -51,8 +60,13 @@ function InitAdmin() {
         />
         <button type="button" onClick={() => getContract()}>Manage</button>
       </div>
+      {children}
     </div>
   );
 }
+
+InitAdmin.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default InitAdmin;

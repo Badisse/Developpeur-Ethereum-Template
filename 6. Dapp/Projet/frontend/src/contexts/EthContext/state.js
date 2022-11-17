@@ -18,6 +18,7 @@ const initialState = {
   workflowStatus: null,
   loading: false,
   voter: false,
+  isOwner: false,
 };
 
 const reducer = (state, action) => {

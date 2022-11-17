@@ -4,9 +4,20 @@ import useEth from '../../contexts/EthContext/useEth';
 import ManageSession from './ManageSession';
 
 function Admin() {
-  const { state: { contract } } = useEth();
+  const { state: { contract, owner, workflowStatus } } = useEth();
   return (
-    !contract ? <InitAdmin /> : <ManageSession />
+    !owner
+      ? (
+        <InitAdmin>
+          {
+            contract && (typeof workflowStatus !== 'number') && (<div>Please enter a valid contract address</div>)
+          }
+          {
+            (typeof workflowStatus === 'number') && (<div>You are not the owner</div>)
+          }
+        </InitAdmin>
+      )
+      : <ManageSession />
   );
 }
 
