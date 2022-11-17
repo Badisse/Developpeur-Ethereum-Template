@@ -8,7 +8,7 @@ import { ethers } from 'ethers';
 import PropTypes from 'prop-types';
 import EthContext from './EthContext';
 import { reducer, actions, initialState } from './state';
-import artifact from '../../contracts/Voting.json';
+import artifact from '../../contracts/Voting.sol/Voting.json';
 
 function EthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
