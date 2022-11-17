@@ -8,7 +8,7 @@ function RoleButton({ userRole }) {
 
   const handleClick = () => {
     dispatch({
-      type: actions.updateRole,
+      type: actions.setRole,
       userRole,
     });
   };

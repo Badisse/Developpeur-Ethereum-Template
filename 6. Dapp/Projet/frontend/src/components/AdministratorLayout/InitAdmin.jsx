@@ -16,7 +16,7 @@ function InitAdmin() {
     try {
       const workflowStatus = await contract.workflowStatus();
       dispatch({
-        type: actions.updateContract,
+        type: actions.setContract,
         data: { contract, workflowStatus },
       });
     } catch (err) {
@@ -32,7 +32,7 @@ function InitAdmin() {
     try {
       const workflowStatus = await contract.workflowStatus();
       dispatch({
-        type: actions.updateContract,
+        type: actions.setContract,
         data: { contract, workflowStatus },
       });
     } catch (err) {
