@@ -1,9 +1,11 @@
 import React from 'react';
+import InitAdmin from './InitAdmin';
+import useEth from '../../contexts/EthContext/useEth';
 
 function Admin() {
-  console.log('admin');
+  const { state: { contract } } = useEth();
   return (
-    <div className="h-screen">Admin</div>
+    !contract && <InitAdmin />
   );
 }
 

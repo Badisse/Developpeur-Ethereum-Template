@@ -15,6 +15,7 @@ function EthProvider({ children }) {
 
   const init = useCallback(async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
     let account;
     provider.send('eth_requestAccounts', [])
       .then((accnt) => {
@@ -25,7 +26,7 @@ function EthProvider({ children }) {
     dispatch({
       type: actions.init,
       data: {
-        artifact, provider, account, networkID,
+        artifact, provider, signer, account, networkID,
       },
     });
   }, []);
@@ -33,7 +34,7 @@ function EthProvider({ children }) {
   useEffect(() => {
     const events = ['chainChanged', 'accountsChanged'];
     const handleChange = () => {
-      init(state.artifact);
+      init();
     };
 
     events.forEach((e) => window.ethereum.on(e, handleChange));

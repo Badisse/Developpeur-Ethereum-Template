@@ -9,9 +9,7 @@ function RoleButton({ userRole }) {
   const handleClick = () => {
     dispatch({
       type: actions.updateRole,
-      data: {
-        userRole,
-      },
+      userRole,
     });
   };
 
