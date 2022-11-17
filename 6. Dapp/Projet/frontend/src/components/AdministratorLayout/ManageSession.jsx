@@ -28,11 +28,9 @@ function ManageSession() {
       default:
         break;
     }
-    console.log(transaction);
     try {
       provider.waitForTransaction(transaction.hash).then(async () => {
         const newWorkflowStatus = await contract.workflowStatus();
-        console.log(newWorkflowStatus);
         dispatch({
           type: actions.updateWorkflowStatus,
           workflowStatus: newWorkflowStatus,
@@ -45,39 +43,44 @@ function ManageSession() {
 
   return (
     <div className="h-screen">
-      <div>
-        <div>
-          Current Workflow Status:
-          {WORKFLOW_STATUS_STRING[workflowStatus]}
-        </div>
-        <div>Update Workflow Status</div>
-        <button
-          type="button"
-          className="border"
-          onClick={updateWorkflowStatus}
-        >
-          Update
-        </button>
-      </div>
-      <div>
-        <div>
-          Add voter
-        </div>
-        <input
-          type="text"
-          onChange={
-            (e) => setVoterAddress(e.target.value)
-          }
-          value={voterAddress}
-        />
-        <button
-          type="button"
-          className="border"
-          onClick={updateWorkflowStatus}
-        >
-          Update
-        </button>
-      </div>
+      {workflowStatus !== WORKFLOW_STATUS.votingSessionEnded
+        && (
+          <div>
+            <div>
+              Current Workflow Status:
+              {WORKFLOW_STATUS_STRING[workflowStatus]}
+            </div>
+            <div>Update Workflow Status</div>
+            <button
+              type="button"
+              className="border"
+              onClick={updateWorkflowStatus}
+            >
+              Update
+            </button>
+          </div>
+        )}
+      {workflowStatus === WORKFLOW_STATUS.registeringVoters
+        && (
+          <div>
+            <div>
+              Add voter
+            </div>
+            <input
+              type="text"
+              onChange={
+                (e) => setVoterAddress(e.target.value)
+              }
+              value={voterAddress}
+            />
+            <button
+              type="button"
+              className="border"
+            >
+              Add
+            </button>
+          </div>
+        )}
     </div>
   );
 }
