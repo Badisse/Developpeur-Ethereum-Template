@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useEth from '../../contexts/EthContext/useEth';
 import WORKFLOW_STATUS, { WORKFLOW_STATUS_STRING } from '../../constants/workflowStatus';
 import { actions } from '../../contexts/EthContext/state';
 
 function ManageSession() {
   const { state: { workflowStatus, contract, provider }, dispatch } = useEth();
+  const [voterAddress, setVoterAddress] = useState();
 
   const updateWorkflowStatus = async () => {
     dispatch({
@@ -45,18 +46,38 @@ function ManageSession() {
   return (
     <div className="h-screen">
       <div>
-        Current Workflow Status:
-        {WORKFLOW_STATUS_STRING[workflowStatus]}
+        <div>
+          Current Workflow Status:
+          {WORKFLOW_STATUS_STRING[workflowStatus]}
+        </div>
+        <div>Update Workflow Status</div>
+        <button
+          type="button"
+          className="border"
+          onClick={updateWorkflowStatus}
+        >
+          Update
+        </button>
       </div>
-      <div>Update Workflow Status</div>
-      <button
-        type="button"
-        className="border"
-        onClick={updateWorkflowStatus}
-      >
-        Update
-      </button>
-      <div>Add voter</div>
+      <div>
+        <div>
+          Add voter
+        </div>
+        <input
+          type="text"
+          onChange={
+            (e) => setVoterAddress(e.target.value)
+          }
+          value={voterAddress}
+        />
+        <button
+          type="button"
+          className="border"
+          onClick={updateWorkflowStatus}
+        >
+          Update
+        </button>
+      </div>
     </div>
   );
 }
