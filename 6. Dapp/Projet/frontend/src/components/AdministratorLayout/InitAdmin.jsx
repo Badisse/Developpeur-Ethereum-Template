@@ -52,6 +52,7 @@ function InitAdmin() {
         <input
           type="text"
           placeholder="Contract Address"
+          value={inputAddress}
           onChange={(e) => setInputAddress(e.target.value)}
         />
         <button type="button" onClick={() => getContract(inputAddress)}>Manage</button>
