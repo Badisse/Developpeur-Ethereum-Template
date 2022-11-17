@@ -40,7 +40,6 @@ function InitAdmin() {
     }
   };
 
-  console.log('InitAdmin');
   return (
     <div className="h-screen">
       <div>
