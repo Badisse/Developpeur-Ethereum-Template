@@ -1,20 +1,36 @@
 import React from 'react';
+import { Typewriter } from 'react-simple-typewriter';
 import { BiWallet } from 'react-icons/bi';
 import useEth from '../../contexts/EthContext/useEth';
 import ChooseRole from './ChooseRole';
 
 function Home() {
   const { init, state: { account } } = useEth();
-  console.log('home');
 
   const handleConnect = () => {
-    console.log('connect');
     init();
   };
 
   return (
     <div className="h-screen flex flex-col items-center justify-center gap-10">
-      <h1 className="text-5xl font-bold">Welcome to The Voting DApp</h1>
+      <div className="text-5xl font-bold">
+        {
+          !account
+            ? (
+              <Typewriter
+                words={['Welcome to The Voting DApp']}
+                cursor
+                loop={1}
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
+            )
+            : (
+              <div>Welcome to The Voting DApp</div>
+            )
+        }
+      </div>
       <h2 className="text-xl">This Web3 App allow you to create, manage or access a voting session !</h2>
       {
         !account
