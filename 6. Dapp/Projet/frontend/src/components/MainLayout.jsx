@@ -6,9 +6,18 @@ import Admin from './AdministratorLayout/Admin';
 import Voter from './VoterLayout/Voter';
 import UserAddr from './UserAddr';
 import { ADMIN_ID, VOTER_ID } from '../constants/roles';
+import ParticlesBackground from './Particles/ParticlesBackground';
+import WORKFLOW_STATUS from '../constants/workflowStatus';
 
 function MainLayout() {
-  const { state: { loading, account, userRole } } = useEth();
+  const {
+    state: {
+      loading,
+      account,
+      userRole,
+      workflowStatus,
+    },
+  } = useEth();
 
   if (loading) {
     return (
@@ -31,6 +40,10 @@ function MainLayout() {
       }
       {
         userRole && userRole.id === VOTER_ID && <Voter />
+      }
+      {
+        workflowStatus === WORKFLOW_STATUS.votingSessionEnded
+        && <ParticlesBackground />
       }
     </>
   );

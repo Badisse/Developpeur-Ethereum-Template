@@ -5,7 +5,7 @@ import MainLayout from './components/MainLayout';
 function App() {
   return (
     <EthProvider>
-      <div className="bg-blue-800 text-white">
+      <div className="bg-sky-900 text-white">
         <MainLayout />
       </div>
     </EthProvider>
