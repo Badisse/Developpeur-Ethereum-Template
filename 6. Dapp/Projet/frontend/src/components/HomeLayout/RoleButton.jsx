@@ -16,7 +16,7 @@ function RoleButton({ userRole }) {
   return (
     <button
       type="button"
-      className="border p-2"
+      className="bg-cyan-300 p-3 font-semibold rounded-lg text-sky-800 hover:scale-110 transition ease-in-out duration-300 animate-pulse"
       onClick={handleClick}
     >
       {userRole.name}

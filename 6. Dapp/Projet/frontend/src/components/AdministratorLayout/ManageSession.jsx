@@ -78,7 +78,7 @@ function ManageSession() {
   };
 
   return (
-    <div className="h-screen">
+    <div>
       <div>
         <div>
           Current Workflow Status:

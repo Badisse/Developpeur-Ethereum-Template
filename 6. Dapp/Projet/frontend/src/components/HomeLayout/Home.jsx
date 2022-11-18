@@ -31,7 +31,7 @@ function Home() {
             )
         }
       </div>
-      <h2 className="text-xl">This Web3 App allow you to create, manage or access a voting session !</h2>
+      <h2 className="text-2xl text-gray-200 font-light">This Web3 App allow you to create, manage or access a voting session !</h2>
       {
         !account
           ? (
