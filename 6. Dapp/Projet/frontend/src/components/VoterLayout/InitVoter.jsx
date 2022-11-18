@@ -20,7 +20,7 @@ function InitVoter({ children }) {
     } catch (err) {
       console.log(err);
     }
-    if (workflowStatus) {
+    if (typeof workflowStatus === 'number') {
       try {
         voter = await contract.getVoter(account);
       } catch (err) {
