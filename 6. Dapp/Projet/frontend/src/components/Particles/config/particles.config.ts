@@ -2,27 +2,27 @@ const particlesConfig = {
   autoPlay: true,
   background: {
     color: {
-      value: '',
+      value: ''
     },
     image: '',
     position: '',
     repeat: '',
     size: '',
-    opacity: 1,
+    opacity: 1
   },
   backgroundMask: {
     composite: 'destination-out',
     cover: {
       color: {
-        value: '#fff',
+        value: '#fff'
       },
-      opacity: 1,
+      opacity: 1
     },
-    enable: false,
+    enable: false
   },
   fullScreen: {
     enable: true,
-    zIndex: 0,
+    zIndex: 0
   },
   detectRetina: true,
   duration: 0,
@@ -32,13 +32,13 @@ const particlesConfig = {
     events: {
       onClick: {
         enable: false,
-        mode: [],
+        mode: []
       },
       onDiv: {
         selectors: [],
         enable: false,
         mode: [],
-        type: 'circle',
+        type: 'circle'
       },
       onHover: {
         enable: false,
@@ -46,10 +46,10 @@ const particlesConfig = {
         parallax: {
           enable: false,
           force: 2,
-          smooth: 10,
-        },
+          smooth: 10
+        }
       },
-      resize: true,
+      resize: true
     },
     modes: {
       attract: {
@@ -58,10 +58,10 @@ const particlesConfig = {
         easing: 'ease-out-quad',
         factor: 1,
         maxSpeed: 50,
-        speed: 1,
+        speed: 1
       },
       bounce: {
-        distance: 200,
+        distance: 200
       },
       bubble: {
         distance: 200,
@@ -71,31 +71,31 @@ const particlesConfig = {
           distance: 200,
           duration: 0.4,
           mix: false,
-          selectors: [],
-        },
+          selectors: []
+        }
       },
       connect: {
         distance: 80,
         links: {
-          opacity: 0.5,
+          opacity: 0.5
         },
-        radius: 60,
+        radius: 60
       },
       grab: {
         distance: 100,
         links: {
           blink: false,
           consent: false,
-          opacity: 1,
-        },
+          opacity: 1
+        }
       },
       push: {
         default: true,
         groups: [],
-        quantity: 4,
+        quantity: 4
       },
       remove: {
-        quantity: 2,
+        quantity: 2
       },
       repulse: {
         distance: 200,
@@ -111,87 +111,87 @@ const particlesConfig = {
           speed: 1,
           maxSpeed: 50,
           easing: 'ease-out-quad',
-          selectors: [],
-        },
+          selectors: []
+        }
       },
       slow: {
         factor: 3,
-        radius: 200,
+        radius: 200
       },
       trail: {
         delay: 1,
         pauseOnStop: false,
-        quantity: 1,
+        quantity: 1
       },
       light: {
         area: {
           gradient: {
             start: {
-              value: '#ffffff',
+              value: '#ffffff'
             },
             stop: {
-              value: '#000000',
-            },
+              value: '#000000'
+            }
           },
-          radius: 1000,
+          radius: 1000
         },
         shadow: {
           color: {
-            value: '#000000',
+            value: '#000000'
           },
-          length: 2000,
-        },
-      },
-    },
+          length: 2000
+        }
+      }
+    }
   },
   manualParticles: [],
   motion: {
     disable: false,
     reduce: {
       factor: 4,
-      value: true,
-    },
+      value: true
+    }
   },
   particles: {
     bounce: {
       horizontal: {
         random: {
           enable: false,
-          minimumValue: 0.1,
+          minimumValue: 0.1
         },
-        value: 0,
+        value: 0
       },
       vertical: {
         random: {
           enable: false,
-          minimumValue: 0.1,
+          minimumValue: 0.1
         },
-        value: 0,
-      },
+        value: 0
+      }
     },
     collisions: {
       bounce: {
         horizontal: {
           random: {
             enable: false,
-            minimumValue: 0.1,
+            minimumValue: 0.1
           },
-          value: 1,
+          value: 1
         },
         vertical: {
           random: {
             enable: false,
-            minimumValue: 0.1,
+            minimumValue: 0.1
           },
-          value: 1,
-        },
+          value: 1
+        }
       },
       enable: false,
       mode: 'bounce',
       overlap: {
         enable: true,
-        retries: 0,
-      },
+        retries: 0
+      }
     },
     color: {
       value: '#f00',
@@ -202,7 +202,7 @@ const particlesConfig = {
           offset: 0,
           speed: 30,
           decay: 0,
-          sync: true,
+          sync: true
         },
         s: {
           count: 0,
@@ -210,7 +210,7 @@ const particlesConfig = {
           offset: 0,
           speed: 1,
           decay: 0,
-          sync: true,
+          sync: true
         },
         l: {
           count: 0,
@@ -218,29 +218,29 @@ const particlesConfig = {
           offset: 0,
           speed: 1,
           decay: 0,
-          sync: true,
-        },
-      },
+          sync: true
+        }
+      }
     },
     groups: {},
     move: {
       angle: {
         offset: 0,
-        value: 90,
+        value: 90
       },
       attract: {
         distance: 200,
         enable: false,
         rotate: {
           x: 3000,
-          y: 3000,
-        },
+          y: 3000
+        }
       },
       center: {
         x: 50,
         y: 50,
         mode: 'percent',
-        radius: 0,
+        radius: 0
       },
       decay: 0.1,
       distance: {},
@@ -251,61 +251,61 @@ const particlesConfig = {
         acceleration: 9.81,
         enable: true,
         inverse: false,
-        maxSpeed: 200,
+        maxSpeed: 200
       },
       path: {
         clamp: true,
         delay: {
           random: {
             enable: false,
-            minimumValue: 0,
+            minimumValue: 0
           },
-          value: 0,
+          value: 0
         },
         enable: false,
-        options: {},
+        options: {}
       },
       outModes: {
         default: 'destroy',
         bottom: 'destroy',
         left: 'destroy',
         right: 'destroy',
-        top: 'none',
+        top: 'none'
       },
       random: false,
       size: false,
       speed: {
         min: 50,
-        max: 150,
+        max: 150
       },
       spin: {
         acceleration: 0,
-        enable: false,
+        enable: false
       },
       straight: false,
       trail: {
         enable: false,
         length: 10,
         fillColor: {
-          value: '#000000',
-        },
+          value: '#000000'
+        }
       },
       vibrate: false,
-      warp: false,
+      warp: false
     },
     number: {
       density: {
         enable: false,
         area: 800,
-        factor: 1000,
+        factor: 1000
       },
       limit: 300,
-      value: 0,
+      value: 0
     },
     opacity: {
       random: {
         enable: false,
-        minimumValue: 0.1,
+        minimumValue: 0.1
       },
       value: 1,
       animation: {
@@ -315,29 +315,29 @@ const particlesConfig = {
         decay: 0,
         sync: true,
         destroy: 'min',
-        startValue: 'max',
-      },
+        startValue: 'max'
+      }
     },
     reduceDuplicates: false,
     shadow: {
       blur: 0,
       color: {
-        value: '#000',
+        value: '#000'
       },
       enable: false,
       offset: {
         x: 0,
-        y: 0,
-      },
+        y: 0
+      }
     },
     shape: {
       options: {},
-      type: 'circle',
+      type: 'circle'
     },
     size: {
       random: {
         enable: false,
-        minimumValue: 1,
+        minimumValue: 1
       },
       value: 3,
       animation: {
@@ -347,58 +347,58 @@ const particlesConfig = {
         decay: 0,
         sync: false,
         destroy: 'none',
-        startValue: 'random',
-      },
+        startValue: 'random'
+      }
     },
     stroke: {
-      width: 0,
+      width: 0
     },
     zIndex: {
       random: {
         enable: false,
-        minimumValue: 0,
+        minimumValue: 0
       },
       value: 0,
       opacityRate: 1,
       sizeRate: 1,
-      velocityRate: 1,
+      velocityRate: 1
     },
     life: {
       count: 0,
       delay: {
         random: {
           enable: false,
-          minimumValue: 0,
+          minimumValue: 0
         },
         value: 0,
-        sync: false,
+        sync: false
       },
       duration: {
         random: {
           enable: false,
-          minimumValue: 0.0001,
+          minimumValue: 0.0001
         },
         value: 0,
-        sync: false,
-      },
+        sync: false
+      }
     },
     rotate: {
       random: {
         enable: false,
-        minimumValue: 0,
+        minimumValue: 0
       },
       value: {
         min: 0,
-        max: 360,
+        max: 360
       },
       animation: {
         enable: true,
         speed: 60,
         decay: 0,
-        sync: false,
+        sync: false
       },
       direction: 'random',
-      path: false,
+      path: false
     },
     destroy: {
       bounds: {},
@@ -408,69 +408,69 @@ const particlesConfig = {
         factor: {
           random: {
             enable: false,
-            minimumValue: 0,
+            minimumValue: 0
           },
-          value: 3,
+          value: 3
         },
         rate: {
           random: {
             enable: false,
-            minimumValue: 0,
+            minimumValue: 0
           },
           value: {
             min: 4,
-            max: 9,
-          },
+            max: 9
+          }
         },
         sizeOffset: true,
-        particles: {},
-      },
+        particles: {}
+      }
     },
     roll: {
       darken: {
         enable: true,
-        value: 30,
+        value: 30
       },
       enable: true,
       enlighten: {
         enable: true,
-        value: 30,
+        value: 30
       },
       mode: 'vertical',
       speed: {
         min: 15,
-        max: 25,
-      },
+        max: 25
+      }
     },
     tilt: {
       random: {
         enable: false,
-        minimumValue: 0,
+        minimumValue: 0
       },
       value: {
         min: 0,
-        max: 360,
+        max: 360
       },
       animation: {
         enable: true,
         speed: 60,
         decay: 0,
-        sync: false,
+        sync: false
       },
       direction: 'random',
-      enable: true,
+      enable: true
     },
     twinkle: {
       lines: {
         enable: false,
         frequency: 0.05,
-        opacity: 1,
+        opacity: 1
       },
       particles: {
         enable: false,
         frequency: 0.05,
-        opacity: 1,
-      },
+        opacity: 1
+      }
     },
     wobble: {
       distance: 30,
@@ -478,10 +478,10 @@ const particlesConfig = {
       speed: {
         angle: {
           min: -15,
-          max: 15,
+          max: 15
         },
-        move: 10,
-      },
+        move: 10
+      }
     },
     orbit: {
       animation: {
@@ -489,23 +489,23 @@ const particlesConfig = {
         enable: false,
         speed: 1,
         decay: 0,
-        sync: false,
+        sync: false
       },
       enable: false,
       opacity: 1,
       rotation: {
         random: {
           enable: false,
-          minimumValue: 0,
+          minimumValue: 0
         },
-        value: 45,
+        value: 45
       },
-      width: 1,
+      width: 1
     },
     links: {
       blink: false,
       color: {
-        value: '#fff',
+        value: '#fff'
       },
       consent: false,
       distance: 100,
@@ -515,29 +515,29 @@ const particlesConfig = {
       shadow: {
         blur: 5,
         color: {
-          value: '#000',
+          value: '#000'
         },
-        enable: false,
+        enable: false
       },
       triangles: {
         enable: false,
-        frequency: 1,
+        frequency: 1
       },
       width: 1,
-      warp: false,
+      warp: false
     },
     repulse: {
       random: {
         enable: false,
-        minimumValue: 0,
+        minimumValue: 0
       },
       value: 0,
       enabled: false,
       distance: 1,
       duration: 1,
       factor: 1,
-      speed: 1,
-    },
+      speed: 1
+    }
   },
   pauseOnBlur: true,
   pauseOnOutsideViewport: true,
@@ -550,32 +550,32 @@ const particlesConfig = {
     autoPlay: true,
     fill: true,
     life: {
-      wait: false,
+      wait: false
     },
     rate: {
       quantity: 10,
-      delay: 0.1,
+      delay: 0.1
     },
     shape: 'square',
     startCount: 0,
     size: {
       mode: 'percent',
       height: 0,
-      width: 0,
+      width: 0
     },
     particles: {
       links: {
-        enable: false,
+        enable: false
       },
       shape: {
-        type: 'circle',
-      },
+        type: 'circle'
+      }
     },
     position: {
       x: 50,
-      y: 50,
-    },
-  },
-};
+      y: 50
+    }
+  }
+}
 
-export default particlesConfig;
+export default particlesConfig

@@ -1,8 +1,8 @@
-import React from 'react';
-import RoleButton from './RoleButton';
-import ROLES from '../../constants/roles';
+import React from 'react'
+import RoleButton from './RoleButton'
+import ROLES from '../../constants/roles'
 
-function ChooseRole() {
+function ChooseRole (): JSX.Element {
   return (
     <div className="flex flex-col items-center justify-around w-1/3 h-1/4 bg-gradient-to-t from-cyan-700 rounded-2xl">
       <div className="text-lg font-medium">Select a Role</div>
@@ -16,7 +16,7 @@ function ChooseRole() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default ChooseRole;
+export default ChooseRole

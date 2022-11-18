@@ -1,15 +1,15 @@
-import React from 'react';
-import { Typewriter } from 'react-simple-typewriter';
-import { BiWallet } from 'react-icons/bi';
-import useEth from '../../contexts/EthContext/useEth';
-import ChooseRole from './ChooseRole';
+import React from 'react'
+import { Typewriter } from 'react-simple-typewriter'
+import { BiWallet } from 'react-icons/bi'
+import useEth from '../../contexts/EthContext/useEth'
+import ChooseRole from './ChooseRole'
 
-function Home() {
-  const { init, state: { account } } = useEth();
+function Home (): JSX.Element {
+  const { init, state: { account } } = useEth()
 
-  const handleConnect = () => {
-    init();
-  };
+  const handleConnect = (): void => {
+    init().catch((err) => console.log(err))
+  }
 
   return (
     <div className="h-screen flex flex-col items-center justify-center gap-10">
@@ -25,10 +25,10 @@ function Home() {
                 deleteSpeed={50}
                 delaySpeed={1000}
               />
-            )
+              )
             : (
               <div>Welcome to The Voting DApp</div>
-            )
+              )
         }
       </div>
       <h2 className="text-2xl text-gray-200 font-light">This Web3 App allow you to create, manage or access a voting session !</h2>
@@ -43,11 +43,11 @@ function Home() {
               <BiWallet size="2em" />
               <div>Connect Your Wallet</div>
             </button>
-          )
+            )
           : <ChooseRole />
       }
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
