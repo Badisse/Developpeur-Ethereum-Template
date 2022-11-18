@@ -34,9 +34,9 @@ function InitAdmin({ children }) {
     } catch (err) {
       console.log(err);
     }
-    if (workflowStatus) {
+    if (typeof workflowStatus === 'number') {
       const owner = await contract.owner();
-      isOwner = owner === account;
+      isOwner = owner.toLowerCase() === account.toLowerCase();
     }
     dispatch({
       type: actions.setContract,
