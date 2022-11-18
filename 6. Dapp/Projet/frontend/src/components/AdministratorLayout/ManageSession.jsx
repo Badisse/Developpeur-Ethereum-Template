@@ -1,11 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useEth from '../../contexts/EthContext/useEth';
 import WORKFLOW_STATUS, { WORKFLOW_STATUS_STRING } from '../../constants/workflowStatus';
 import { actions } from '../../contexts/EthContext/state';
 
 function ManageSession() {
   const { state: { workflowStatus, contract, provider }, dispatch } = useEth();
-  const [voterAddress, setVoterAddress] = useState();
+  const [voterAddress, setVoterAddress] = useState('');
+  const [voters, setVoters] = useState([]);
+
+  const getVoterRegisteredEvents = async () => {
+    const eventFilter = contract.filters.VoterRegistered();
+    const events = await contract.queryFilter(eventFilter);
+    return events;
+  };
+
+  const getVoters = async () => {
+    const events = await getVoterRegisteredEvents();
+    events.forEach((event) => {
+      console.log(event.args.voterAddress);
+      setVoters((current) => {
+        if (current.includes(event.args.voterAddress)) {
+          return [...current];
+        }
+        return [...current, event.args.voterAddress];
+      });
+    });
+  };
+
+  useEffect(() => {
+    getVoters();
+  }, []);
 
   const updateWorkflowStatus = async () => {
     let transaction;
@@ -99,6 +123,9 @@ function ManageSession() {
             </button>
           </div>
         )}
+      {
+        voters?.map((voter) => <div key={voter}>{voter}</div>)
+      }
     </div>
   );
 }
