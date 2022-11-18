@@ -1,4 +1,5 @@
 import React from 'react';
+import { BiWallet } from 'react-icons/bi';
 import useEth from '../contexts/EthContext/useEth';
 
 function UserAddr() {
@@ -6,11 +7,14 @@ function UserAddr() {
   console.log('usrAddr');
   return (
     <div
-      className="bg-pink-800 py-2 px-6 font-semibold rounded-full absolute top-4 right-4"
+      className="flex items-center gap-2 bg-cyan-600 py-2 px-6 font-semibold text-sm rounded-xl absolute top-4 right-4 drop-shadow-2xl"
     >
-      {account.substring(0, 6)}
-      ...
-      {account.substring(account.length - 4)}
+      <BiWallet size="1em" />
+      <div>
+        {account.substring(0, 6)}
+        ...
+        {account.substring(account.length - 4)}
+      </div>
     </div>
   );
 }
