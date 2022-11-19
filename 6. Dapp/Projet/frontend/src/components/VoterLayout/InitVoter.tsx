@@ -1,10 +1,11 @@
+/*[object Object]*/
 import React, { ReactNode, useState } from 'react'
 import { ContractInterface, ethers } from 'ethers'
 import PropTypes from 'prop-types'
 import useEth from '../../contexts/EthContext/useEth'
 import { actions } from '../../contexts/EthContext/state'
 
-interface Props {
+type Props = {
   children: ReactNode
 }
 

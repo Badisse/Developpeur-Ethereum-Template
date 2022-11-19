@@ -1,6 +1,7 @@
+/*[object Object]*/
 import { IState } from "./state.types"
 
-export interface IAction {
+export type IAction = {
   type: string
   payload?: IState
 }

@@ -1,3 +1,4 @@
+/*[object Object]*/
 const WORKFLOW_STATUS = {
   registeringVoters: 0,
   proposalsRegistrationStarted: 1,

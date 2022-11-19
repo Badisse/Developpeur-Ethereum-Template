@@ -1,3 +1,4 @@
+/*[object Object]*/
 import React from 'react'
 import InitVoter from './InitVoter'
 import useEth from '../../contexts/EthContext/useEth'
@@ -5,6 +6,7 @@ import VoterDashboard from './VoterDashboard'
 
 function Voter (): JSX.Element {
   const { state: { contract, workflowStatus, isVoter } } = useEth()
+
   return (
     !isVoter
       ? (

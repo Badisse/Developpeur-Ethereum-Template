@@ -1,3 +1,4 @@
+/*[object Object]*/
 import { IRole } from "../types/role.types"
 
 export const ADMIN_ID = 0

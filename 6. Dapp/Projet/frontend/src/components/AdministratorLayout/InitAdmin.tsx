@@ -1,3 +1,4 @@
+/*[object Object]*/
 import React, { ReactNode, useState } from 'react'
 import { BigNumber, BytesLike, ContractInterface, ethers } from 'ethers'
 import useEth from '../../contexts/EthContext/useEth'
@@ -5,7 +6,7 @@ import { actions } from '../../contexts/EthContext/state'
 import Card from '../Utils/Card'
 import Button from '../Utils/Button'
 
-interface Props {
+type Props = {
   children: ReactNode
 }
 
@@ -45,6 +46,7 @@ function InitAdmin ({ children }: Props): JSX.Element {
     await contract?.workflowStatus().then((res: BigNumber) => {
       workflowStatus = res
     })
+
     if (typeof workflowStatus === 'number') {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const owner = await contract?.owner() as string

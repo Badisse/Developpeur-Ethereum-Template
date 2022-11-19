@@ -1,3 +1,4 @@
+/*[object Object]*/
 import React from 'react'
 import InitAdmin from './InitAdmin'
 import useEth from '../../contexts/EthContext/useEth'
@@ -5,6 +6,7 @@ import ManageSession from './ManageSession'
 
 function Admin (): JSX.Element {
   const { state: { isOwner, contract, workflowStatus } } = useEth()
+
   return (
     <div className="h-screen flex flex-col items-center justify-center">
       {

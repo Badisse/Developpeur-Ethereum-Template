@@ -1,6 +1,7 @@
+/*[object Object]*/
 import { BigNumber } from "ethers"
 
-export interface IProposal {
+export type IProposal = {
   description: string
   voteCount: BigNumber
 }

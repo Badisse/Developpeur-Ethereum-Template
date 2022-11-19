@@ -1,4 +1,5 @@
-export interface IRole {
+/*[object Object]*/
+export type IRole = {
   id: number
   name: string
 }

@@ -1,6 +1,7 @@
+/*[object Object]*/
 import React, { ReactNode } from 'react'
 
-interface Props {
+type Props = {
   children: ReactNode
 }
 

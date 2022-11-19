@@ -1,3 +1,4 @@
+/*[object Object]*/
 import { createContext } from 'react'
 import { IEthContextInterface } from '../../types/ethContext.types'
 import { initialState } from './state'

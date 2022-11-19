@@ -1,3 +1,4 @@
+/*[object Object]*/
 import React, { useState, useEffect } from 'react'
 import useEth from '../../contexts/EthContext/useEth'
 import WORKFLOW_STATUS, { WORKFLOW_STATUS_STRING } from '../../constants/workflowStatus'
@@ -14,6 +15,7 @@ function ManageSession (): JSX.Element {
     const events = eventFilter
       ? await contract?.queryFilter(eventFilter)
       : undefined
+
     return events
   }
 
@@ -23,9 +25,11 @@ function ManageSession (): JSX.Element {
       console.log(event.args?.voterAddress)
       setVoters((current) => {
         const voterAddr = event.args?.voterAddress as string
+
         if (current.includes(voterAddr)) {
           return [...current]
         }
+
         return [...current, voterAddr]
       })
     })
@@ -54,6 +58,7 @@ function ManageSession (): JSX.Element {
 
   const updateWorkflowStatus = async (): Promise<void> => {
     let transaction: ethers.Transaction
+
     switch (workflowStatus) {
       case WORKFLOW_STATUS.registeringVoters:
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
@@ -87,6 +92,7 @@ function ManageSession (): JSX.Element {
       type: actions.loading,
       payload: undefined
     })
+
     if (transaction.hash) {
       await provider?.waitForTransaction(transaction.hash).then(() => {
         dispatch({

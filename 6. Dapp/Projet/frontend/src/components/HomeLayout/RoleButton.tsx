@@ -1,9 +1,10 @@
+/*[object Object]*/
 import React from 'react'
 import useEth from '../../contexts/EthContext/useEth'
 import { actions } from '../../contexts/EthContext/state'
 import { IRole } from '../../types/role.types'
 
-interface Props {
+type Props = {
   userRole: IRole
 }
 

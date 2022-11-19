@@ -1,3 +1,4 @@
+/*[object Object]*/
 import artifact from '../../contracts/Voting.sol/Voting.json'
 import { IAction } from '../../types/actions.types'
 import { IState } from '../../types/state.types'
@@ -14,7 +15,7 @@ const actions = {
 }
 
 const initialState: IState = {
-  artifact: artifact,
+  artifact,
   provider: undefined,
   signer: undefined,
   account: undefined,
@@ -29,6 +30,7 @@ const initialState: IState = {
 
 const reducer = (state: IState, action: IAction): IState => {
   const { type, payload } = action
+
   switch (type) {
     case actions.loading:
       return { ...state, loading: true }

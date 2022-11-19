@@ -1,3 +1,4 @@
+/*[object Object]*/
 import React from 'react'
 import { Typewriter } from 'react-simple-typewriter'
 import { BiWallet } from 'react-icons/bi'

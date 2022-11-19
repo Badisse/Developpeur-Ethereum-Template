@@ -1,3 +1,4 @@
+/*[object Object]*/
 import React from 'react'
 import { EthProvider } from './contexts/EthContext'
 import MainLayout from './components/MainLayout'

@@ -1,3 +1,4 @@
+/*[object Object]*/
 const particlesConfig = {
   autoPlay: true,
   background: {

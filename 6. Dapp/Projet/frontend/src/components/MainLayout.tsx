@@ -1,3 +1,4 @@
+/*[object Object]*/
 import React from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
 import useEth from '../contexts/EthContext/useEth'

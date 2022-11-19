@@ -1,3 +1,4 @@
+/*[object Object]*/
 import { useContext } from 'react'
 import { IEthContextInterface } from '../../types/ethContext.types'
 import EthContext from './EthContext'

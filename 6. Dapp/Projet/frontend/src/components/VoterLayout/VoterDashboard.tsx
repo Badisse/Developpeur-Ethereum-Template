@@ -1,3 +1,4 @@
+/*[object Object]*/
 import React, { useState } from 'react'
 import useEth from '../../contexts/EthContext/useEth'
 import { actions } from '../../contexts/EthContext/state'
@@ -22,6 +23,7 @@ function VoterDashboard (): JSX.Element {
       type: actions.loading,
       payload: undefined
     })
+
     if(transaction.hash){
       await provider?.waitForTransaction(transaction.hash).then(() => {
             dispatch({
@@ -40,6 +42,7 @@ function VoterDashboard (): JSX.Element {
       type: actions.loading,
       payload: undefined
     })
+
     if(transaction.hash){
       await provider?.waitForTransaction(transaction.hash).then(() => {
             dispatch({

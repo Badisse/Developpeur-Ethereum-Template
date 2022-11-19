@@ -1,3 +1,4 @@
+/*[object Object]*/
 import React, {
   useReducer,
   useCallback,
@@ -10,7 +11,7 @@ import EthContext from './EthContext'
 import { reducer, actions, initialState } from './state'
 import { IEthWindow } from '../../types/ethWindow.types'
 
-interface Props {
+type Props = {
   children: ReactNode
 }
 
@@ -47,6 +48,7 @@ function EthProvider ({ children }: Props): JSX.Element {
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
     events.forEach((e) => ((window as unknown) as IEthWindow).ethereum.on(e, handleChange))
+
     return () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
       events.forEach((e) => ((window as unknown) as IEthWindow).ethereum.removeListener(e, handleChange))

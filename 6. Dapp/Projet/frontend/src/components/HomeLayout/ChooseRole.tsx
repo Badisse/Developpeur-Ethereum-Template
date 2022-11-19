@@ -1,3 +1,4 @@
+/*[object Object]*/
 import React from 'react'
 import RoleButton from './RoleButton'
 import ROLES from '../../constants/roles'
