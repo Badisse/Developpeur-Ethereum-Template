@@ -10,6 +10,8 @@ type Props = {
   children: ReactNode
 }
 
+const test = "eee"
+
 function InitAdmin ({ children }: Props): JSX.Element {
   const { state: { signer, artifact, account }, dispatch } = useEth()
   const [inputAddress, setInputAddress] = useState('')

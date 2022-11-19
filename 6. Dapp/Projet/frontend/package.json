@@ -24,7 +24,8 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "lint:fix": "eslint --fix \"src/**/*.{ts,tsx}\""
+    "lint:fix": "eslint --fix \"src/**/*.{ts,tsx}\"",
+    "precommit": "lint-staged"
   },
   "browserslist": {
     "production": [
@@ -53,8 +54,24 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
     "nodemon": "^2.0.20",
     "postcss": "^8.4.19",
+    "prettier": "^2.7.1",
     "tailwindcss": "^3.2.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,tsx}": [
+      "prettier --config .prettierrc --write",
+      "eslint --fix \"src/**/*.{ts,tsx}\"",
+      "eslint \"src/**/*.{ts,tsx}\"",
+      "git add"
+    ]
   }
 }
