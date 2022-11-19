@@ -2,18 +2,9 @@ import React, { useState } from 'react'
 import useEth from '../../contexts/EthContext/useEth'
 import { actions } from '../../contexts/EthContext/state'
 import WORKFLOW_STATUS, { WORKFLOW_STATUS_STRING } from '../../constants/workflowStatus'
-import { BigNumber, ethers } from 'ethers'
-
-export interface Voter {
-  isRegistered: boolean
-  hasVoted: boolean
-  votedProposalId: BigNumber
-}
-
-export interface Proposal {
-  description: string
-  voteCount: BigNumber
-}
+import { ethers } from 'ethers'
+import { IProposal } from '../../types/proposal.types'
+import { IVoter } from '../../types/voter.types'
 
 function VoterDashboard (): JSX.Element {
   const { state: { contract, provider, workflowStatus }, dispatch } = useEth()
@@ -21,8 +12,8 @@ function VoterDashboard (): JSX.Element {
   const [proposalId, setProposalId] = useState<string>('')
   const [voterAddress, setVoterAddress] = useState<string>('')
   const [oneProposalId, setOneProposalId] = useState<string>('')
-  const [voter, setVoter] = useState<Voter>()
-  const [proposal, setProposal] = useState<Proposal>()
+  const [voter, setVoter] = useState<IVoter>()
+  const [proposal, setProposal] = useState<IProposal>()
 
   const addProposal = async (): Promise<void> => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
@@ -62,7 +53,7 @@ function VoterDashboard (): JSX.Element {
   const getVoter = async (): Promise<void> => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      const res = await contract?.getVoter(voterAddress) as Voter
+      const res = await contract?.getVoter(voterAddress) as IVoter
       console.log(res.isRegistered)
       setVoter(res)
     } catch (err) {
@@ -73,7 +64,7 @@ function VoterDashboard (): JSX.Element {
   const getOneProposal = async (): Promise<void> => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      const res = await contract?.getOneProposal(oneProposalId) as Proposal
+      const res = await contract?.getOneProposal(oneProposalId) as IProposal
       setProposal(res)
     } catch (err) {
       console.log(err)

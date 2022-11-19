@@ -8,19 +8,10 @@ import React, {
 import { ethers } from 'ethers'
 import EthContext from './EthContext'
 import { reducer, actions, initialState } from './state'
+import { IEthWindow } from '../../types/ethWindow.types'
 
 interface Props {
   children: ReactNode
-}
-
-type ExtensionForProvider = {
-  on: (event: string, callback: (...params: any) => void) => void;
-  removeListener: (event: string, callback: (...params: any) => void) => void;
-};
-type EthersProvider = ethers.providers.ExternalProvider & ExtensionForProvider;
-
-interface EthWindow extends Window {
-  ethereum: EthersProvider
 }
 
 function EthProvider ({ children }: Props): JSX.Element {
@@ -31,7 +22,7 @@ function EthProvider ({ children }: Props): JSX.Element {
       type: actions.loading,
       payload: undefined
     })
-    const provider = new ethers.providers.Web3Provider(((window as unknown) as EthWindow).ethereum)
+    const provider = new ethers.providers.Web3Provider(((window as unknown) as IEthWindow).ethereum)
     const signer = provider.getSigner()
     let account
     provider.send('eth_requestAccounts', [])
@@ -55,10 +46,10 @@ function EthProvider ({ children }: Props): JSX.Element {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
-    events.forEach((e) => ((window as unknown) as EthWindow).ethereum.on(e, handleChange))
+    events.forEach((e) => ((window as unknown) as IEthWindow).ethereum.on(e, handleChange))
     return () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
-      events.forEach((e) => ((window as unknown) as EthWindow).ethereum.removeListener(e, handleChange))
+      events.forEach((e) => ((window as unknown) as IEthWindow).ethereum.removeListener(e, handleChange))
     }
   }, [init, state.artifact])
 

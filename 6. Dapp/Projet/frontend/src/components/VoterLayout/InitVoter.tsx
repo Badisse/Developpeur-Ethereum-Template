@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from 'react'
-import { ethers } from 'ethers'
+import { ContractInterface, ethers } from 'ethers'
 import PropTypes from 'prop-types'
 import useEth from '../../contexts/EthContext/useEth'
 import { actions } from '../../contexts/EthContext/state'
@@ -17,7 +17,7 @@ function InitVoter ({ children }: Props): JSX.Element {
       type: actions.loading,
       payload: undefined
     })
-    const contract = new ethers.Contract(inputAddress, artifact.abi, signer)
+    const contract = new ethers.Contract(inputAddress, artifact?.abi as ContractInterface, signer)
     let workflowStatus: undefined | number
     let isVoter = false
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call

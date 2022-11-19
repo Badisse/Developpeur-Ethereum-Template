@@ -1,10 +1,10 @@
 import React from 'react'
 import useEth from '../../contexts/EthContext/useEth'
 import { actions } from '../../contexts/EthContext/state'
-import { Role } from '../../constants/roles'
+import { IRole } from '../../types/role.types'
 
 interface Props {
-  userRole: Role
+  userRole: IRole
 }
 
 function RoleButton ({ userRole }: Props): JSX.Element {
@@ -23,7 +23,7 @@ function RoleButton ({ userRole }: Props): JSX.Element {
       className="bg-cyan-300 p-3 font-semibold rounded-lg text-sky-800 hover:scale-110 transition ease-in-out duration-300 animate-pulse"
       onClick={handleClick}
     >
-      {userRole.name}
+      {userRole?.name}
     </button>
   )
 }

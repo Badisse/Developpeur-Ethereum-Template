@@ -1,16 +1,9 @@
+import { IRole } from "../types/role.types"
+
 export const ADMIN_ID = 0
 export const VOTER_ID = 1
 
-export interface Role {
-  id: number
-  name: string
-}
-
-interface Roles {
-  [role: string]: Role
-}
-
-const ROLES: Roles = {
+const ROLES: {[role: string]: IRole} = {
   admin: {
     id: ADMIN_ID,
     name: 'Administrator'

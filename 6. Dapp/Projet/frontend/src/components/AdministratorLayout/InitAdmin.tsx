@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from 'react'
-import { BigNumber, ethers } from 'ethers'
+import { BigNumber, BytesLike, ContractInterface, ethers } from 'ethers'
 import useEth from '../../contexts/EthContext/useEth'
 import { actions } from '../../contexts/EthContext/state'
 import Card from '../Utils/Card'
@@ -15,7 +15,7 @@ function InitAdmin ({ children }: Props): JSX.Element {
 
   const deployContract = async (): Promise<void> => {
     console.log('test')
-    const factory = new ethers.ContractFactory(artifact.abi, artifact.bytecode, signer)
+    const factory = new ethers.ContractFactory(artifact?.abi as ContractInterface, artifact?.bytecode as BytesLike, signer)
     const contract = await factory.deploy()
     const isOwner = true
     dispatch({
@@ -38,7 +38,7 @@ function InitAdmin ({ children }: Props): JSX.Element {
       type: actions.loading,
       payload: undefined
     })
-    const contract = new ethers.Contract(inputAddress, artifact.abi, signer)
+    const contract = new ethers.Contract(inputAddress, artifact?.abi as ContractInterface, signer)
     let workflowStatus
     let isOwner
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call

@@ -1,13 +1,10 @@
-import { createContext, Dispatch } from 'react'
-import { Action, initialState, State } from './state'
+import { createContext } from 'react'
+import { IEthContextInterface } from '../../types/ethContext.types'
+import { initialState } from './state'
 
-export interface EthContextInterface {
-  state: State
-  dispatch: Dispatch<Action>
-  init: () => Promise<void>
-}
 
-const EthContext = createContext<EthContextInterface>({
+
+const EthContext = createContext<IEthContextInterface>({
   state: initialState,
   dispatch: () => null,
   init: async () => await new Promise(resolve => resolve())

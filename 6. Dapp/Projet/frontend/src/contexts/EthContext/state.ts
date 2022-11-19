@@ -1,23 +1,8 @@
-import { ethers } from "ethers"
-import { Role } from "../../constants/roles"
 import artifact from '../../contracts/Voting.sol/Voting.json'
+import { IAction } from '../../types/actions.types'
+import { IState } from '../../types/state.types'
 
-export interface Action {
-  type: string
-  payload: {
-  artifact?: typeof artifact
-  provider?: ethers.providers.Web3Provider | undefined
-  signer?: ethers.Signer | undefined
-  account?: string | undefined
-  networkID?: ethers.providers.Network | undefined
-  contract?: ethers.Contract | undefined
-  userRole?: Role | undefined
-  workflowStatus?: number | undefined
-  loading?: boolean
-  isVoter?: boolean
-  isOwner?: boolean
-} | undefined
-}
+
 
 const actions = {
   loading: 'LOADING',
@@ -28,21 +13,7 @@ const actions = {
   updateWorkflowStatus: 'UPDATE_WORKFLOW_STATUS'
 }
 
-export interface State {
-  artifact: typeof artifact
-  provider: ethers.providers.Web3Provider | undefined
-  signer: ethers.Signer | undefined
-  account: string | undefined
-  networkID: ethers.providers.Network | undefined
-  contract: ethers.Contract | undefined
-  userRole: Role | undefined
-  workflowStatus: number | undefined
-  loading: boolean
-  isVoter: boolean
-  isOwner: boolean
-}
-
-const initialState: State = {
+const initialState: IState = {
   artifact: artifact,
   provider: undefined,
   signer: undefined,
@@ -56,7 +27,7 @@ const initialState: State = {
   isOwner: false
 }
 
-const reducer = (state: State, action: Action): State => {
+const reducer = (state: IState, action: IAction): IState => {
   const { type, payload } = action
   switch (type) {
     case actions.loading:
